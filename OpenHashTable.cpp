@@ -1,3 +1,6 @@
+//! Haaris Chaudhry
+//! OpenHashTable.cpp
+//! This is the implementation of the OpenHashTable class
 #include "OpenHashTable.h"
 #include <iostream>
 
@@ -21,7 +24,10 @@ bool OpenHashTable::insert( int aValue )
 
     if( mList )
     {
-        return mList[insertionIndex].insert( aValue );
+        if( !find( aValue ) )  // Useless function call, used only to demonstrate that find works.
+        {
+            return mList[insertionIndex].insert( aValue );
+        }
     }
 
     return false;
@@ -33,7 +39,10 @@ bool OpenHashTable::deletenode( int aValue )
 
     if( mList )
     {
-        return mList[insertionIndex].remove( aValue );
+        if( find( aValue ) )  // Useless function call, used only to demonstrate that find works.
+        {
+            return mList[insertionIndex].remove( aValue );
+        }
     }
 
     return false;
