@@ -12,9 +12,10 @@ class OpenHashTable
 public:
     /**
     * Constructor
+    * @param aSize The size of the list
     * @return An empty OpenHashTable with
     */
-    OpenHashTable(int aSize);
+    OpenHashTable( unsigned int aSize);
 
     /**
     * Destructor
@@ -22,8 +23,35 @@ public:
     */
     ~OpenHashTable();
 
+    /**
+    * Insertion Function
+    * @param The value to be inserted into the hash table
+    * @return A boolean indicating if insertion was successful
+    */
+    bool insert( int aValue );
+
+    /**
+    * Function that deletes a given value
+    * @param The value to be inserted into the hash table
+    * @return A boolean indicating if insertion was successful
+    */
+    bool deletenode( int aValue );
+
+    /**
+    * Function that finds a given value
+    * @param The value to be searched for
+    * @return A boolean indicating whether or not we found the value
+    */
+    bool find( int aValue );
+
+    /**
+    * Prints the hash table
+    */
+    bool print();
+
 private:
-    const int mSIZE;
+    unsigned int hash( int aValue );
+    const unsigned int mSIZE;
     DoubleLinkedList* mList;
 
 };

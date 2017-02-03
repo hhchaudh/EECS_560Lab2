@@ -1,5 +1,5 @@
-lab1: main.o Node.o DoubleLinkedList.o OpenHashTable.o
-	g++ -std=c++11 -g -Wall main.o Node.o DoubleLinkedList.o OpenHashTable.o -o lab1
+lab2: main.o Node.o DoubleLinkedList.o OpenHashTable.o
+	g++ -std=c++11 -g -Wall main.o Node.o DoubleLinkedList.o OpenHashTable.o -o lab2
 
 main.o: main.cpp
 	g++ -std=c++11 -g -Wall -c main.cpp
@@ -14,5 +14,5 @@ Node.o: Node.h Node.cpp
 	g++ -std=c++11 -g -Wall -c Node.cpp
 
 clean:
-	rm *.o lab1
+	rm *.o lab2
 	echo clean done

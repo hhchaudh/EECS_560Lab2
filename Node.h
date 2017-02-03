@@ -14,7 +14,7 @@ public:
     * @param aValue The value to be contained by the Node
     * @return A Node with aValue as its value
     */
-    Node(int aValue);
+    Node( int aValue );
 
     /**
     * Returns the value of the Node
@@ -26,7 +26,7 @@ public:
     * Sets the value of the Node
     * @param aVal An integer value to be contained by the Node
     */
-    void setValue(int aVal);
+    void setValue( int aVal );
 
     /**
     * Returns the Node that the mNext variable is pointing to
@@ -38,7 +38,7 @@ public:
     * Sets the value mNext
     * @param aNodePtr A pointer pointing to a Node that mNext will point to
     */
-    void setNext(Node* aNodePtr);
+    void setNext( Node* aNodePtr );
 
     /**
     * Returns the Node that the mPrevious variable is pointing to
@@ -50,7 +50,7 @@ public:
     * Sets the value mPrevious
     * @param aNodePtr A pointer pointing to a Node that mPrevious will point to
     */
-    void setPrevious(Node* aNodePtr);
+    void setPrevious( Node* aNodePtr );
 
 private:
     /**

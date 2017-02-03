@@ -7,7 +7,7 @@
 
 //! The DoubleLinkedList Constructor
 //! Initialize mFront to nullptr
-DoubleLinkedList::DoubleLinkedList():mFront(nullptr)
+DoubleLinkedList::DoubleLinkedList() :mFront( nullptr )
 {
 }
 
@@ -17,7 +17,7 @@ DoubleLinkedList::~DoubleLinkedList()
     Node* deleter = mFront;     //!< Used to delete a node
     Node* mover = mFront;       //!< Used to move to the next node
 
-    while(deleter != nullptr)
+    while( deleter != nullptr )
     {
         mover = mover->getNext();
         delete deleter;
@@ -29,58 +29,48 @@ DoubleLinkedList::~DoubleLinkedList()
 
 //! The initial insert function
 //! Returns true when a number can be inserted and false when a number already
-//! exists and therefore cannot be inserted
-bool DoubleLinkedList::insert(int aValue)
+//! exists and therefore cannot be inserted.  Inserts aValue in the front of the list.
+bool DoubleLinkedList::insert( int aValue )
 {
-    return recursiveInsert(mFront, aValue);
-}
-
-//! The recursive portion of the insertion function
-bool DoubleLinkedList::recursiveInsert(Node* aNodePtr, int aValue)
-{
-    if(aNodePtr && aNodePtr->getValue() == aValue)
+    if( !mFront )
     {
-        return false;   //!< Don't insert an existing value and return false
-    }
-
-    if(!aNodePtr)   //!< Check for mFront being nullptr (The list is empty)
-    {
-        Node* newNode = new Node(aValue);
-        mFront = newNode;
+        mFront = new Node( aValue );
         return true;
     }
-    else if(aNodePtr->getNext() == nullptr) //!< End of list, so we add node
+
+    if( !find( aValue ) )
     {
-        Node* newNode = new Node(aValue);
-        newNode->setPrevious(aNodePtr);
-        aNodePtr->setNext(newNode);
+        Node* newNode = new Node( aValue );
+        newNode->setNext( mFront );
+        mFront->setPrevious( newNode );
+        mFront = newNode;
         return true;
     }
     else
     {
-        return recursiveInsert(aNodePtr->getNext(), aValue);
+        return false;
     }
 }
 
 //! Prints a list, if the list is empty, return false, true otherwise
 bool DoubleLinkedList::print()
 {
-    return recursivePrint(mFront);
+    return recursivePrint( mFront );
 }
 
 //! The recursive portion of the print function
-bool DoubleLinkedList::recursivePrint(Node* aNodePtr)
+bool DoubleLinkedList::recursivePrint( Node* aNodePtr )
 {
-    if(!aNodePtr)   //! mFront is nullptr, return false
+    if( !aNodePtr )   //! mFront is nullptr, return false
     {
         return false;
     }
 
     std::cout << aNodePtr->getValue() << " ";
 
-    if(aNodePtr->getNext())
+    if( aNodePtr->getNext() )
     {
-        return recursivePrint(aNodePtr->getNext());
+        return recursivePrint( aNodePtr->getNext() );
     }
 
     return true;
@@ -89,57 +79,57 @@ bool DoubleLinkedList::recursivePrint(Node* aNodePtr)
 //! The remove function takes an integer and removes that value if it exists
 //! in the list.  If it does not exist, then the function returns false.  The
 //! function returns true otherwise.
-bool DoubleLinkedList::remove(int aValue)
+bool DoubleLinkedList::remove( int aValue )
 {
-   return recursiveRemove(mFront, aValue);
+    return recursiveRemove( mFront, aValue );
 }
 
 //! The recursive portion of the removal function.
-bool DoubleLinkedList::recursiveRemove(Node* aNodePtr, int aValue)
+bool DoubleLinkedList::recursiveRemove( Node* aNodePtr, int aValue )
 {
-    if(!aNodePtr)   //!< aValue does not exist if we get here
+    if( !aNodePtr )   //!< aValue does not exist if we get here
     {
         return false;
     }
 
-    if(aNodePtr->getValue() == aValue)
+    if( aNodePtr->getValue() == aValue )
     {
         Node* currentNode = aNodePtr;
         Node* nextNode = currentNode->getNext();
         Node* previousNode = currentNode->getPrevious();
 
-        if(previousNode)
+        if( previousNode )
         {
-            previousNode->setNext(nextNode);
+            previousNode->setNext( nextNode );
         }
         else
         {
             mFront = nextNode;
         }
 
-        if(nextNode)
+        if( nextNode )
         {
-            nextNode->setPrevious(previousNode);
+            nextNode->setPrevious( previousNode );
         }
 
         delete currentNode;
         return true;
     }
 
-    return recursiveRemove(aNodePtr->getNext(), aValue);
+    return recursiveRemove( aNodePtr->getNext(), aValue );
 }
 
 //! List reversal
 void DoubleLinkedList::reverse()
 {
-    if(!mFront || !(mFront->getNext())) //!< Preliminary Checks on mFront
+    if( !mFront || !(mFront->getNext()) ) //!< Preliminary Checks on mFront
     {
         return;
     }
     else
     {
         Node* referenceNode = mFront;   //!< Pointer will persist through recursion
-        recursiveReverse(referenceNode, mFront);
+        recursiveReverse( referenceNode, mFront );
     }
 }
 
@@ -152,34 +142,34 @@ void DoubleLinkedList::reverse()
 //! Each return of the recursed functions will be used to save the local value
 //! to the node pointed at by the persistent pointer, and then the peristent pointer
 //! will point to the next node in preparation of the next function return.
-void DoubleLinkedList::recursiveReverse(Node*& aRefNode, Node* aCurrentNode)
+void DoubleLinkedList::recursiveReverse( Node*& aRefNode, Node* aCurrentNode )
 {
     int localValue = aCurrentNode->getValue();
-    if(aCurrentNode->getNext())
+    if( aCurrentNode->getNext() )
     {
-        recursiveReverse(aRefNode, aCurrentNode->getNext());
+        recursiveReverse( aRefNode, aCurrentNode->getNext() );
     }
-    aRefNode->setValue(localValue);
+    aRefNode->setValue( localValue );
     aRefNode = aRefNode->getNext();
 }
 
-bool DoubleLinkedList::find(int aValue)
+bool DoubleLinkedList::find( int aValue )
 {
-    return recursiveFind(mFront, aValue);
+    return recursiveFind( mFront, aValue );
 }
 
-bool DoubleLinkedList::recursiveFind(Node* aNodePtr, int aValue)
+bool DoubleLinkedList::recursiveFind( Node* aNodePtr, int aValue )
 {
-    if(!aNodePtr)
+    if( !aNodePtr )
     {
         return false;
     }
-    else if(aNodePtr->getValue() == aValue)
+    else if( aNodePtr->getValue() == aValue )
     {
         return true;
     }
     else
     {
-        return recursiveFind(aNodePtr->getNext(), aValue);
+        return recursiveFind( aNodePtr->getNext(), aValue );
     }
 }

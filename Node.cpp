@@ -5,7 +5,7 @@
 #include "Node.h"
 
 //! Constructor, set mValue to passed in aValue. Set both mNext and mPrevious to nullptr
-Node::Node(int aValue):mValue(aValue),mNext(nullptr),mPrevious(nullptr)
+Node::Node( int aValue ) :mValue( aValue ), mNext( nullptr ), mPrevious( nullptr )
 {
 }
 
@@ -15,7 +15,7 @@ int Node::getValue() const
     return mValue;
 }
 
-void Node::setValue(int aValue)
+void Node::setValue( int aValue )
 {
     mValue = aValue;
 }
@@ -25,7 +25,7 @@ Node* Node::getNext() const
     return mNext;
 }
 
-void Node::setNext(Node* aNodePtr)
+void Node::setNext( Node* aNodePtr )
 {
     mNext = aNodePtr;
 }
@@ -35,7 +35,7 @@ Node* Node::getPrevious() const
     return mPrevious;
 }
 
-void Node::setPrevious(Node* aNodePtr)
+void Node::setPrevious( Node* aNodePtr )
 {
     mPrevious = aNodePtr;
 }
